@@ -21,3 +21,17 @@ Objectif long terme :
 - integrer a possibiité de pouvoir avoir ds recommendation de custom
 BREF TOUT EST POSSIBLE MAIS CONCENTRONS SUR L'ESSENCE 
 
+
+13-04-2024 : 
+On va integrer la fonction qui permettera d'utiliser la position actuelle de l'utilisateur pour afficher de données 
+météorologiques 
+
+on utilisera l'API geolocation pour faire cela 
+
+on gère les rreur avec la fonction errorCallBack
+
+
+function errorCallback(error) {
+  alert(`ERROR(${error.code}): ${error.message}`);
+}
+et on utilisera geolocation.watch

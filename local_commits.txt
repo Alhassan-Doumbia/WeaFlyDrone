@@ -1,0 +1,23 @@
+-revoir le code sass et ameliorer certains details 
+comme le troncage au niveu des diagnostique 
+
+- ameliorer la nommenclature des classes 
+
+[samedi 13-04-2024  fin de la mise en plce du Layout ]Après 33h presque de code 
+je met en place le lyout comme il se doit pour que je puisse facilment manipuler les balises quand je serai en javascript 
+
+objectif :
+-Trouver la bonne API 
+-mettre en place les accès 
+-commence rle code javascript 
+
+oubli :
+- j'ai pas integrer le footer mais bon c'est pour pus tard 
+- je dois aussi integrer les bons thèes de couleur 
+
+Objectif long terme : 
+- Integrer un système de creation de compte et de session par utilisateurs 
+- imaginer d'autre contenu à la suit de la première page : un dashboard par exemple avec les prévision ; des graphiques etc 
+- integrer a possibiité de pouvoir avoir ds recommendation de custom
+BREF TOUT EST POSSIBLE MAIS CONCENTRONS SUR L'ESSENCE 
+

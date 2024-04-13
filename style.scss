@@ -1,0 +1,263 @@
+// Mettre en place le design systeme
+* {
+  list-style: none;
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: MontserratSemi;
+  src: url("assets/Fonts/Montserrat-SemiBold.ttf");
+}
+@font-face {
+  font-family: MontserratRegular;
+  src: url("assets/Fonts/Montserrat-Regular.ttf");
+}
+// variables
+$headlines: 24px;
+$sub_headlines: 20px;
+$regular: 16px;
+$negative: red;
+$positive: green;
+$regularColor: white;
+$inactive:gray;
+
+$fontFamSemiBold: "MontserratSemi";
+$fontFamRegular: "MontserratRegular";
+
+//mixins
+@mixin SubHeadlinesBox {
+  min-width: 300px;
+  width: fit-content;
+  min-height: 48px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+
+  color: $regularColor;
+  font-weight: 800;
+  font-size: $sub_headlines;
+  font-family: $fontFamSemiBold; // Rajouter les autres fonts
+
+  border-bottom:5px solid $regularColor;
+}
+
+@mixin dataBox {
+  font-family: sans-serif; // rajouter les autres polices
+  color: $regularColor;
+  font-size: $regular;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  width: 100%;
+  min-height: 200px;
+  height: fit-content;
+  background-color: transparent;
+}
+
+//
+body {
+  main {
+    width: 100%;
+    height: 100vh;
+    background-color: black; // remplacer ce backgroud par une image
+    display: flex;
+    justify-content: space-between;
+
+    .infoDisplay {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      width: 70%;
+      height: 100%;
+
+      padding-left: 40px;
+      padding-right: 40px;
+
+      padding-bottom: 30px;
+
+      header {
+        min-height: 50px;
+        height: fit-content;
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        // background-color: purple;
+        // mettre un display flex au besoin
+      }
+      .weatherDisplay {
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+
+        .temperature_icon {
+          display: flex;
+          gap: 10px;
+
+          width: fit-content;
+          height: fit-content;
+          align-items: center;
+        }
+        .diagnostic_block {
+          display: flex;
+          width: fit-content;
+          height: fit-content;
+          max-height: 300px;
+
+          align-items: center;
+          gap: 40px;
+          #icon {
+            width: 24px;
+            height: 24px;
+          }
+          .diagnostic_text {
+            h3 {
+              font-size: $sub_headlines;
+              font-family: $fontFamSemiBold;
+              color: $regularColor;
+            }
+            p {
+              font-size: $regular;
+              font-family: $fontFamRegular;
+              color: $regularColor;
+            }
+          }
+        }
+        #temperature {
+          font-size: $headlines;
+          font-family: $fontFamSemiBold;
+          color: $regularColor;
+        }
+        #weather {
+          font-family: $fontFamRegular;
+          font-size: $regular;
+          color: $regularColor;
+        }
+        #cityInfo {
+          font-size: $headlines;
+          font-family: $fontFamSemiBold;
+          color: $regularColor;
+        }
+      }
+    }
+
+    .sideBar {
+      width: 30%;
+      height: 100%;
+      // background-color: purple;
+
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      form{
+        display: flex;
+        input[type="text"] {
+          width:100%;
+          height: 50px;
+  
+          font-size: $regular;
+          font-family: $fontFamRegular;
+          color: black;
+
+          outline: none;
+
+          padding-left:10px;
+          padding-right:10px;
+        }
+        .send{
+          width:50px;
+          height:50px;
+          color:$regularColor;
+          background-color: $positive;
+          font-size: 18px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+        }
+      }
+      section{
+        .historyZone{
+          padding-left: 20px;
+          padding-right: 20px;
+
+          // background-color: yellowgreen;
+          min-height:100px;
+          height: fit-content;
+          width: 100%;
+          .historyHeadlines{@include SubHeadlinesBox();}
+          .historyDisplay{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            min-height:100px;
+            height: fit-content;
+
+            // background-color: red;
+
+            //manipuation dyamique via javascript
+            #noData{
+              //sert de placeHolder quand il n'y a apas de d'historique 
+              color:$inactive;
+              font-size: $regular;
+              font-family: $fontFamRegular;
+
+              display: none;
+            }
+            ul{
+              width: 100%;
+
+              margin-top: 20px;
+              li{
+                font-size: $regular;
+                font-family: $fontFamRegular;
+                color: $regularColor;
+
+                margin-top: 10px;
+                margin-bottom: 10px;
+                
+              }
+            }
+            //Manipulation dynamique via javscript [end]
+          }
+        }
+        .weatherDataZone{
+          padding-left: 20px;
+          padding-right: 20px;
+
+          // background-color: brown;
+          min-height:100px;
+          height: fit-content;
+          width: 100%;
+          .wheatherDataHeadlines{@include SubHeadlinesBox();}
+          .weatherData{
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .data{
+              display: flex;
+              justify-content: space-between;
+              p{
+                font-family: $fontFamRegular,sans-serif;
+                font-size: $regular;
+                color: $regularColor;
+              }
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}

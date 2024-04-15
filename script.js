@@ -1,5 +1,7 @@
-require("dotenv").config(); // pour pouvoir utiliser le fichier secret.env
 
+// require("dotenv").config(); // pour pouvoir utiliser le fichier secret.env
+// import fetch from 'node-fetch';
+import './node_modules/dotenv/config.js';
 async function getWeather(city) {
   const url = `https://open-weather13.p.rapidapi.com/city/${city}/FR`;
   const options = {
@@ -62,6 +64,18 @@ function getCurrentPositionWeather() {
   }
 }
 
+// fonction permettant de creer l'historique 
+// Le tableau qui acceuile les noms doit être déclaré l'exterieur de la fonction à l'exterieur de la fonction
+function RecordInCityHistory(citiesArray,cityName){
+  citiesArray.push(cityName);
+  const historyContainer=document.createElement('ul');
+  HistoryDisplay.appendChild(historyContainer);
+
+  for(let i=0;i<citiesHistory.length;i++){
+      const li=document.createElement("li") ;
+      li.textContent=citiesHistory[i];
+      historyContainer.appendChild(li);
+}
 // variables
 const searchField = document.querySelector("#SearchZone");
 const sendButton = document.querySelector(".send");
@@ -80,6 +94,8 @@ const lightIntensity = document.getElementById("light_intensity");
 
 const weather=document.getElementById("weather");
 const cityInfo=document.getElementById('cityInfo');
+
+const HistoryDisplay=document.querySelector('.historyDisplay');
 //Fin variables
 
 //currentPositon weather function to get  the user current position  and then
@@ -95,7 +111,10 @@ function infoDisplay(temp, humi, precip, windInt, visib, lightInt) {
 
   // on ameliorera l'affichage au niveau de l'interface plus tard 
 }
-window.addEventListener("load", () => {
+// Manipulatio de l'historique sinon on passera notre temps à reinitialiser l'historique 
+let citiesHistory=[];
+//Tableau de l'historique 
+window.addEventListener("load", function currentWeatherDisplay() {
   const response=getCurrentPositionWeather();
   const weatherObject = JSON.parse(response); //pour transformer en objet
 
@@ -108,21 +127,113 @@ window.addEventListener("load", () => {
     weatherObject.main.humidity,
     weatherObject.main.visibility
   );
-// modification du background et des icone en fonction de la prévision
-switch(weatherObject.weather[0].main){
-    case "clouds":
-        // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
-        temperatureIcon.setAttribute('src',"assets/icones/icons8-rain-96.png");
-        weatherIndicator.setAttribute('src',)
-    break;
-    case "sunny":
-        // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
-        temperatureIcon.setAttribute('src',"assets/icones/icons8-summer-96.png");
-    break;
-}
+  // modification du background et des icone en fonction de la prévision
+  switch(weatherObject.weather[0].main){
+      case "clouds":
+          // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
+          temperatureIcon.setAttribute('src',"assets/icones/icons8-rain-96.png");
+          weatherIndicator.setAttribute('src',)
+      break;
+      case "clear":
+          // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
+          temperatureIcon.setAttribute('src',"assets/icones/icons8-summer-96.png");
+      break;
+  }
 
 weather.innerText=weatherObject.weather[0].main;
 cityInfo.innerText=`${weatherObject.sys.name},${weatherObject.sys.country}`
 
 // je vais reflechir à mettre en place une fonction pour faire tout ça ; comme ça quand je ferrai l'interraction avec le champs de recherche , je coderai pas des max 
 });
+
+
+// le code  des fonctions anonymes qui sont en bas là sont verbeuse du coups je vais factoriser 
+//le code à partir du else ligne 142 
+
+sendButton.addEventListener('click',(e)=>{
+  e.preventDefault();
+  let searchFieldContent=document.querySelector('#searchZone').value;
+  if (searchFieldContent===''){
+      currentWeatherDisplay();
+  }
+  else{
+    //à factoriser 
+    const response=getWeather(searchFieldContent)
+    const weatherObject = JSON.parse(response); //pour transformer en objet
+    RecordInCityHistory(citiesHistory,searchFieldContent); 
+  //on va commencer à display les informations maintenant
+  infoDisplay(
+    weatherObject.main.temp,
+    weatherObject.main.humidity,
+    "???",
+    weatherObject.wind.speed,
+    weatherObject.main.humidity,
+    weatherObject.main.visibility
+  );
+  // modification du background et des icone en fonction de la prévision
+  switch(weatherObject.weather[0].main){
+      case "clouds":
+          // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
+          temperatureIcon.setAttribute('src',"assets/icones/icons8-rain-96.png");
+          weatherIndicator.setAttribute('src',)
+      break;
+      case "clear":
+          // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
+          temperatureIcon.setAttribute('src',"assets/icones/icons8-summer-96.png");
+      break;
+  }
+
+  weather.innerText=weatherObject.weather[0].main;
+  cityInfo.innerText=`${weatherObject.sys.name},${weatherObject.sys.country}`
+  }
+// à factoriser 
+
+})
+
+// event si on presse entrer , on lance une requête 
+
+searchField.addEventListener('keydown',function(e){
+  if(e.keycode===13){
+    // debug feature 
+    console.log("le bouton entrer a été pressé ");
+    e.preventDefault();
+    let searchFieldContent=document.querySelector('#searchZone').value;
+    if (searchFieldContent===''){
+        currentWeatherDisplay();
+    }
+    else{
+      //à factoriser 
+      const response=getWeather(searchFieldContent)
+      const weatherObject = JSON.parse(response); //pour transformer en objet
+
+    //on va commencer à display les informations maintenant
+    infoDisplay(
+      weatherObject.main.temp,
+      weatherObject.main.humidity,
+      "???",
+      weatherObject.wind.speed,
+      weatherObject.main.humidity,
+      weatherObject.main.visibility
+    );
+    // modification du background et des icone en fonction de la prévision
+    switch(weatherObject.weather[0].main){
+        case "clouds":
+            // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
+            temperatureIcon.setAttribute('src',"assets/icones/icons8-rain-96.png");
+            weatherIndicator.setAttribute('src',)
+        break;
+        case "clear":
+            // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
+            temperatureIcon.setAttribute('src',"assets/icones/icons8-summer-96.png");
+        break;
+    }
+
+    weather.innerText=weatherObject.weather[0].main;
+    cityInfo.innerText=`${weatherObject.sys.name},${weatherObject.sys.country}`
+    }
+  // à factoriser 
+    }
+    // création de l'historique 
+    RecordInCityHistory(citiesHistory,searchFieldContent); 
+    //
+})}

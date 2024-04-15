@@ -6,20 +6,16 @@
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"
-      integrity="sha512-UuQ/zJlbMVAw/UU8vVBhnI4op+/tFOpQZVT+FormmIEhRSCnJWyHiBbEVgM4Uztsht41f3FzVWgLuwzUqOObKw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
-    <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- <script type="module" src="script.js" defer></script> -->
+    <!-- <script type="module" src="./node_modules/dotenv/config.js" defer></script> -->
 
+    <!-- POur le momennt on utilisera le cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/dotenv@16.4.5/lib/main.min.js"></script>
     <!-- integrer ci en bas les cdn pour les icones etc  -->
     <title>WeaFlyDrone</title>
   </head>
@@ -71,67 +67,67 @@
       <div class="sideBar">
         <form action="#">
           <input type="text" name="searchZone" id="SearchZone" />
-          <div class="send">
+          <button type="submit" class="send">
             <i class="fa-thin fa-arrow-right"></i>
-          </div>
+          </button>
         </form>
         <section>
-            <div class="historyZone">
-                <div class="historyHeadlines">
-                    <P>Historique de recherche</P>
-                </div>
-
-                <div class="historyDisplay">
-                    <p id="noData">aucun historique</p> <!--Ajouter displayNone quand il ya une recherche qui a été faite-->
-                    <ul>
-                        <li>Abidjan, Côted'ivoire</li>
-                        <li>Kayes,Mali</li>
-                        <li>ouagadougou, Burkina faso</li>
-                        <li>Dakar,senegal</li>
-                        <li>Libreville,Gabon</li>
-                    </ul> <!--Sera créé dynamiquement à l'aide de ja-->
-                </div>
+          <div class="historyZone">
+            <div class="historyHeadlines">
+              <p>Historique de recherche</p>
             </div>
 
-            <div class="weatherDataZone">
-                <div class="wheatherDataHeadlines">
-                    <p>Détails de la météo</p>
-                </div>
-                <section class="weatherData">
-                  <div class="data">
-                    <p>Température</p>
-                    <p id="temperature">???</p>
-                  </div>
-                  <div class="data">
-                    <p>Humidité relative</p>
-                    <p id="humidity">???</p>
-                  </div>
-                  <div class="data">
-                    <p>précipitations</p>
-                    <p id="precipitation">???</p>
-                  </div>
-                  <div class="data">
-                    <p>vent</p>
-                    <p id="wind">???</p>
-                  </div>
-                  <div class="data">
-                    <p>Pression atmosphérique/p>
-                    <p id="atmos_pressure">???</p>
-                  </div>
-                  <div class="data">
-                    <p>Visibilité</p>
-                    <p id="visibility">???</p>
-                  </div>
-                  <div class="data">
-                    <p>Intensité lumineuse</p>
-                    <p id="light_intensity">???</p>
-                  </div>
-
-                  <!--Les ids seront les zones où les AOI viendront loger leurs données -->
-                </section>
-
+            <div class="historyDisplay">
+              <p id="noData">aucun historique</p>
+              <!--Ajouter displayNone quand il ya une recherche qui a été faite-->
+              <ul>
+                <li>Abidjan, Côted'ivoire</li>
+                <li>Kayes,Mali</li>
+                <li>ouagadougou, Burkina faso</li>
+                <li>Dakar,senegal</li>
+                <li>Libreville,Gabon</li>
+              </ul>
+              <!--Sera créé dynamiquement à l'aide de ja-->
             </div>
+          </div>
 
+          <div class="weatherDataZone">
+            <div class="wheatherDataHeadlines">
+              <p>Détails de la météo</p>
+            </div>
+            <section class="weatherData">
+              <div class="data">
+                <p>Température</p>
+                <p id="temperature">???</p>
+              </div>
+              <div class="data">
+                <p>Humidité relative</p>
+                <p id="humidity">???</p>
+              </div>
+              <div class="data">
+                <p>précipitations</p>
+                <p id="precipitation">???</p>
+              </div>
+              <div class="data">
+                <p>vent</p>
+                <p id="wind">???</p>
+              </div>
+              <div class="data">
+                <p>Pression atmosphérique/p></p>
+                <p id="atmos_pressure">???</p>
+              </div>
+              <div class="data">
+                <p>Visibilité</p>
+                <p id="visibility">???</p>
+              </div>
+              <div class="data">
+                <p>Intensité lumineuse</p>
+                <p id="light_intensity">???</p>
+              </div>
+
+              <!--Les ids seront les zones où les AOI viendront loger leurs données -->
+            </section>
+          </div>
         </section>
       </div>
     </main>

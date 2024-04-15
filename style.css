@@ -116,6 +116,9 @@ body main .sideBar form .send {
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 body main .sideBar section .historyZone {
   padding-left: 20px;

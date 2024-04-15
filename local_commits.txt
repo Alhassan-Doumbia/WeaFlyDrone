@@ -35,3 +35,12 @@ function errorCallback(error) {
   alert(`ERROR(${error.code}): ${error.message}`);
 }
 et on utilisera geolocation.watch
+
+15-04-2024 : j'ai creer une fonction pour mettre à jour l'historique ,
+j'ai codé les cas où l'utilisateur cliquerait sur le bbouton entrer ; et sur e bouto d'envoit 
+
+je dois factorier le code qui permet d'afficher les données selon les villes  que l'utilisateur entre 
+considerer la ligne 152 
+
+aussi je pense creer un fichier Javascript qui me servira de module ; je vais y mettre toutes les fonctions ; ça rendra mon code 
+principal moins verbeux 

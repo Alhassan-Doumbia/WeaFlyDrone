@@ -11,11 +11,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- <script type="module" src="script.js" defer></script> -->
+    <script type="module" src="script.js" defer></script>
     <!-- <script type="module" src="./node_modules/dotenv/config.js" defer></script> -->
 
     <!-- POur le momennt on utilisera le cdn-->
-    <script src="https://cdn.jsdelivr.net/npm/dotenv@16.4.5/lib/main.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/dotenv@16.4.5/lib/main.min.js"></script> -->
     <!-- integrer ci en bas les cdn pour les icones etc  -->
     <title>WeaFlyDrone</title>
   </head>
@@ -28,10 +28,10 @@
         <div class="weatherDisplay">
           <div>
             <p id="weather">Orage</p>
-            <h3 id="cityInfo">Abidjan,Côte d'ivoire</h3>
+            <h3 id="cityInfo"><!--Abidjan,Côte d'ivoire-->???</h3>
 
             <div class="temperature_icon">
-              <p id="temperature">21°C</p>
+              <p id="temperature"><!--21°C-->???</p>
               <img
                 src="assets\icones\icons8-cloud-lightning-96.png"
                 alt="#"
@@ -79,15 +79,18 @@
 
             <div class="historyDisplay">
               <p id="noData">aucun historique</p>
+
               <!--Ajouter displayNone quand il ya une recherche qui a été faite-->
-              <ul>
+              <!-- <ul>
                 <li>Abidjan, Côted'ivoire</li>
                 <li>Kayes,Mali</li>
                 <li>ouagadougou, Burkina faso</li>
                 <li>Dakar,senegal</li>
                 <li>Libreville,Gabon</li>
-              </ul>
-              <!--Sera créé dynamiquement à l'aide de ja-->
+              </ul> --> <!--Dummy content here --> 
+              <!--Sera créé dynamiquement à l'aide de js-->
+
+              
             </div>
           </div>
 

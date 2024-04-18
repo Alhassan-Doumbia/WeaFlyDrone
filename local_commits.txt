@@ -60,3 +60,14 @@ je dois revoir la fonction de l'historique et commencer à reflechir sur comment
 provenant de l'API apparemment le parsing ne marche pas ( je me souviens vaguement d'un certains stringify là qui me permttera de trouver ue piste de solution)
 
 je dois revoir les fonctions d'affichage à l'écran , ya des trucs qui doivent se passer qui ne se passe , j'aime pas du tout 
+
+
+18-04-2024 : en fait , utiliser response.json ; en gros utilisé ".json" parse directement l'élément et le transforme direct en 
+objet javascript. 
+
+- J'ai réglé le probeme d'affichage avec la fonction getCurrentPositonWeather , en fait ; la méthode de l'API getcurrentPosition , de l'API geolocation , ntive 
+s'attends à uen fonction de reussite  et à une fonction d'echec  partat de ce constat , l'on comprendra donc qu'il retournera une promesses , on devra donc utiliser 
+.then si l'on veut commencer à utiliser les résultats (je dois en appredres beaucoups plus sur les promesses js)
+- je dois ameliorer la fonction de display des informations  météorologiques 
+-Appliquer mes nouvelles trouvailles aux autres fonctions 
+

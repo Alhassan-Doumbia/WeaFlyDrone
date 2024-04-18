@@ -153,7 +153,6 @@ body main .sideBar section .historyZone .historyDisplay #noData {
   color: gray;
   font-size: 16px;
   font-family: "MontserratRegular";
-  display: none;
 }
 body main .sideBar section .historyZone .historyDisplay ul {
   width: 100%;

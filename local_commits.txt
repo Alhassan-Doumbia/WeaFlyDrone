@@ -44,3 +44,19 @@ considerer la ligne 152
 
 aussi je pense creer un fichier Javascript qui me servira de module ; je vais y mettre toutes les fonctions ; ça rendra mon code 
 principal moins verbeux 
+
+crire le code selon lequel quand , le contenu du tableau de l'historique de recherche est vide 
+le p qui dit (aucune recherche) ait son display none annulé et quand ya du contenu son display none se reactive 
+
+
+16-04-2024 : separation des fonctions , création de modules de fonction
+fonction getWeatherByCords ()
+fonction getCurrentPositionWeather()
+fonction getWeather(city)
+
+all are working properly
+
+je dois revoir la fonction de l'historique et commencer à reflechir sur comment utiliser les données du fichier JSON 
+provenant de l'API apparemment le parsing ne marche pas ( je me souviens vaguement d'un certains stringify là qui me permttera de trouver ue piste de solution)
+
+je dois revoir les fonctions d'affichage à l'écran , ya des trucs qui doivent se passer qui ne se passe , j'aime pas du tout 

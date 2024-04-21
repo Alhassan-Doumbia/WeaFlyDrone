@@ -21,7 +21,7 @@ $regular: 16px;
 $negative: red;
 $positive: green;
 $regularColor: white;
-$inactive:gray;
+$inactive: gray;
 
 $fontFamSemiBold: "MontserratSemi";
 $fontFamRegular: "MontserratRegular";
@@ -40,7 +40,7 @@ $fontFamRegular: "MontserratRegular";
   font-size: $sub_headlines;
   font-family: $fontFamSemiBold; // Rajouter les autres fonts
 
-  border-bottom:5px solid $regularColor;
+  border-bottom: 5px solid $regularColor;
 }
 
 @mixin dataBox {
@@ -102,6 +102,12 @@ body {
           width: fit-content;
           height: fit-content;
           align-items: center;
+          .temperature {
+            font-size: 50px;
+            font-weight: 800;
+            font-family: $fontFamSemiBold;
+            color: $regularColor;
+          }
         }
         .diagnostic_block {
           display: flex;
@@ -154,25 +160,25 @@ body {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      form{
+      form {
         display: flex;
         input[type="text"] {
-          width:100%;
+          width: 100%;
           height: 50px;
-  
+
           font-size: $regular;
           font-family: $fontFamRegular;
           color: black;
 
           outline: none;
 
-          padding-left:10px;
-          padding-right:10px;
+          padding-left: 10px;
+          padding-right: 10px;
         }
-        .send{
-          width:50px;
-          height:50px;
-          color:$regularColor;
+        .send {
+          width: 50px;
+          height: 50px;
+          color: $regularColor;
           background-color: $positive;
           font-size: 18px;
 
@@ -181,78 +187,100 @@ body {
           justify-content: center;
 
           outline: none;
-          border:none;
+          border: none;
           cursor: pointer;
-
         }
       }
-      section{
-        .historyZone{
+      section {
+        .historyZone {
           padding-left: 20px;
           padding-right: 20px;
 
           // background-color: yellowgreen;
-          min-height:100px;
+          min-height: 100px;
           height: fit-content;
           width: 100%;
-          .historyHeadlines{@include SubHeadlinesBox();}
-          .historyDisplay{
+          .historyHeadlines {
+            @include SubHeadlinesBox();
+          }
+          .historyDisplay {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
 
             width: 100%;
-            min-height:100px;
+            min-height: 100px;
             height: fit-content;
+            li {
+              cursor: pointer;
+              width: 100%;
+              min-height: 45px;
+              height: fit-content + 5px;
+              display: flex;
+              align-items: center;
 
+              padding-left: 5px;
+              padding-right: 5px;
+
+              transition: all ease-out 250ms;
+              &:hover {
+                transition: all ease-in 250ms;
+                border-radius: 2px;
+                background-color: $regularColor;
+                background-blend-mode: screen;
+
+                color: black; //à modifoer
+              }
+            }
             // background-color: red;
 
             //manipuation dyamique via javascript
-            #noData{
-              //sert de placeHolder quand il n'y a apas de d'historique 
-              color:$inactive;
+            #noData {
+              //sert de placeHolder quand il n'y a apas de d'historique
+              color: $inactive;
               font-size: $regular;
               font-family: $fontFamRegular;
               // display: none;
             }
-            ul{
+            ul {
               width: 100%;
 
               margin-top: 20px;
-              li{
+              li {
                 font-size: $regular;
                 font-family: $fontFamRegular;
                 color: $regularColor;
 
                 margin-top: 10px;
                 margin-bottom: 10px;
-                
               }
             }
             //Manipulation dynamique via javscript [end]
           }
         }
-        .weatherDataZone{
+        .weatherDataZone {
           padding-left: 20px;
           padding-right: 20px;
 
           // background-color: brown;
-          min-height:100px;
+          min-height: 100px;
           height: fit-content;
           width: 100%;
-          .wheatherDataHeadlines{@include SubHeadlinesBox();}
-          .weatherData{
+          .wheatherDataHeadlines {
+            @include SubHeadlinesBox();
+          }
+          .weatherData {
             margin-top: 20px;
             display: flex;
             flex-direction: column;
             gap: 20px;
 
-            .data{
+            .data {
               display: flex;
               justify-content: space-between;
-              p{
-                font-family: $fontFamRegular,sans-serif;
+              p {
+                font-family: $fontFamRegular, sans-serif;
                 font-size: $regular;
                 color: $regularColor;
               }
@@ -260,7 +288,6 @@ body {
           }
         }
       }
-      
     }
   }
 }

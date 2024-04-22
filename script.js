@@ -1,10 +1,5 @@
-import {
-  getWeather,
-  getWeatherByCords,
-  getCurrentPositionWeather,
-  RecordInCityHistory,
-  currentWeatherDisplay,
-} from "./utilitary_Functions.js";
+import { cityWeatherDisplay } from "./utilitary_Functions.js";
+
 // variables
 const searchField = document.querySelector("#SearchZone");
 const sendButton = document.querySelector(".send");
@@ -14,7 +9,8 @@ const temperatureIcon = document.querySelector("#icon");
 const weatherIndicator = document.querySelector("#weather");
 const diagnosticVerdict = document.querySelector(".diagnostic_verdict");
 
-const temperature = document.getElementById("temperature");
+const temperature = document.getElementsByClassName("temperature");
+const temperature2 = document.getElementById("temp");
 const humidity = document.getElementById("humidity");
 const precipitation = document.getElementById("precipitaion");
 const wind = document.getElementById("wind");
@@ -30,23 +26,21 @@ const noDataStatement = document.getElementById("noData");
 //currentPositon weather function to get  the user current position  and then
 //dislay the user current position Weather Inof
 
-function infoDisplay(temp, humi, precip, windInt, visib, lightInt) {
-  temperature.innerText = temp;
+function infoDisplay(temp, humi, windInt, visib) {
+  temperature[1].textContent = temp;
+  temperature[0].textContent = `${temp}°C`;
   humidity.innerText = humi;
-  precipitation.innerText = precip;
   wind.innerText = windInt;
   visibility.innerText = visib;
-  lightIntensity.innerText = lightInt;
-
-  // on ameliorera l'affichage au niveau de l'interface plus tard
 }
 
 // Manipulatio de l'historique sinon on passera notre temps à reinitialiser l'historique
 let citiesHistory = [];
+const historyContainer = document.createElement("ul");
 //Tableau de l'historique
 
 window.addEventListener("load", () => {
-  currentWeatherDisplay();
+  cityWeatherDisplay("Abidjan");
 });
 
 //le code à partir du else ligne 142
@@ -56,11 +50,18 @@ sendButton.addEventListener("click", (e) => {
   console.log("la bouton envoyé a été clické ");
   let searchFieldContent = document.querySelector("#SearchZone").value; // J'avais mis value. Faudrit que je recherche comment recuperer le contenu d'un input d etype text
   if (searchFieldContent === "") {
-    currentWeatherDisplay();
+    try {
+      cityWeatherDisplay("Abidjan");
+    } catch (error) {
+      /**JE VAIS APPLIQUER ICI MA NOUVELLE FONCTION */
+    }
   } else {
     //à factoriser
     try {
-      const response2 = getWeather(searchFieldContent);
+      cityWeatherDisplay(searchFieldContent);
+      let li = document.createElement("li");
+      li.textContent = searchFieldContent;
+      citiesHistory.push(li);
       searchField.value = ""; //reinitialiser l'input
       /*debug*/ console.log(
         "le champs est vidé, prêt pour une nouvelle requête"
@@ -68,40 +69,12 @@ sendButton.addEventListener("click", (e) => {
       if (citiesHistory.length === 0) {
         noDataStatement.style.display = "block";
       } else {
-        RecordInCityHistory(citiesHistory, searchFieldContent);
         noDataStatement.style.display = "none";
-        infoDisplay(
-          response2.main.temp,
-          response2.main.humidity,
-          "???",
-          response2.wind.speed,
-          response2.main.humidity,
-          response2.main.visibility
-        );
-        // modification du background et des icone en fonction de la prévision
-        switch (response2.weather[0].main) {
-          case "clouds":
-            // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
-            temperatureIcon.setAttribute(
-              "src",
-              "assets/icones/icons8-rain-96.png"
-            );
-            weatherIndicator.setAttribute("src");
-            break;
-          case "clear":
-            // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
-            temperatureIcon.setAttribute(
-              "src",
-              "assets/icones/icons8-summer-96.png"
-            );
-            break;
+        HistoryDisplay.appendChild(historyContainer);
+        for (let i = 0; i < citiesHistory.length; i++) {
+          historyContainer.appendChild(citiesHistory[i]);
         }
-        //on va commencer à display les informations maintenant
-
-        weather.innerText = response2.weather[0].main;
-        cityInfo.innerText = `${response2.sys.name},${response2.sys.country}`;
       }
-      // à factoriser
     } catch (error) {
       console.log(
         `erreur au niveau du code principal ,l'erreur retourné est la suivante : ${error}`
@@ -119,49 +92,33 @@ searchField.addEventListener("keydown", function (e) {
     e.preventDefault();
     let searchFieldContent = document.querySelector("#searchZone").value;
     if (searchFieldContent === "") {
-      currentWeatherDisplay();
+      cityWeatherDisplay("Abidjan");
     } else {
-      //à factoriser
-      const response = getWeather(searchFieldContent);
-      searchField.textContent = "";
-      //on va commencer à display les informations maintenant
-      infoDisplay(
-        response.main.temp,
-        response.main.humidity,
-        "???",
-        response.wind.speed,
-        response.main.humidity,
-        response.main.visibility
+      cityWeatherDisplay(searchFieldContent);
+      let li = document.createElement("li");
+      li.textContent = searchFieldContent;
+      citiesHistory.push(li);
+      searchField.value = ""; //reinitialiser l'input
+      /*debug*/ console.log(
+        "le champs est vidé, prêt pour une nouvelle requête"
       );
-      // modification du background et des icone en fonction de la prévision
-      switch (response.weather[0].main) {
-        case "clouds":
-          // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
-          temperatureIcon.setAttribute(
-            "src",
-            "assets/icones/icons8-rain-96.png"
-          );
-          weatherIndicator.setAttribute("src");
-          break;
-        case "clear":
-          // document.body.style.backgroundImage="url('../assets/images/Cloudy) à utiliser plus tard
-          temperatureIcon.setAttribute(
-            "src",
-            "assets/icones/icons8-summer-96.png"
-          );
-          break;
-      }
 
-      weather.innerText = response.weather[0].main;
-      cityInfo.innerText = `${response.sys.name},${response.sys.country}`;
+      if (citiesHistory.length === 0) {
+        noDataStatement.style.display = "block";
+      } else {
+        noDataStatement.style.display = "none";
+        HistoryDisplay.appendChild(historyContainer);
+        for (let i = 0; i < citiesHistory.length; i++) {
+          historyContainer.appendChild(citiesHistory[i]);
+        }
+
+        // création de l'historique+verification
+        if (citiesHistory.length === 0) {
+          noDataStatement.style.display = "block";
+        } else {
+          noDataStatement.style.display = "none";
+        }
+      }
     }
-    // à factoriser
-  }
-  // création de l'historique+verification
-  if (citiesHistory.length === 0) {
-    noDataStatement.style.display = "block";
-  } else {
-    RecordInCityHistory(citiesHistory, searchFieldContent);
-    noDataStatement.style.display = "none";
   }
 });

@@ -1,0 +1,47 @@
+{
+  "coord": {
+    "lon": 71.7843,
+    "lat": 40.3842
+  },
+  "weather": [
+    {
+      "id": 501,
+      "main": "Rain",
+      "description": "moderate rain",
+      "icon": "10d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 302.32,
+    "feels_like": 300.91,
+    "temp_min": 302.32,
+    "temp_max": 302.32,
+    "pressure": 1008,
+    "humidity": 25,
+    "sea_level": 1008,
+    "grnd_level": 946
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 4.49,
+    "deg": 284,
+    "gust": 4.31
+  },
+  "rain": {
+    "1h": 1.54
+  },
+  "clouds": {
+    "all": 63
+  },
+  "dt": 1713785205,
+  "sys": {
+    "country": "UZ",
+    "sunrise": 1713745436,
+    "sunset": 1713794302
+  },
+  "timezone": 18000,
+  "id": 1514019,
+  "name": "Fergana",
+  "cod": 200
+}

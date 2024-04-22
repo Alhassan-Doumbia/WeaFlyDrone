@@ -189,6 +189,11 @@ body {
           outline: none;
           border: none;
           cursor: pointer;
+          ion-icon {
+            font-size: $regular;
+            font-family: sans-serif;
+            color: $regularColor;
+          }
         }
       }
       section {

@@ -71,3 +71,45 @@ s'attends à uen fonction de reussite  et à une fonction d'echec  partat de ce 
 - je dois ameliorer la fonction de display des informations  météorologiques 
 -Appliquer mes nouvelles trouvailles aux autres fonctions 
 
+
+22-04-2024 : J'ai changé d'API et du coups , la fonction getcurrentPositionWeather doit être modifiée pour ne permettre que  d'utiliser la fonction getWeather que su la vile d'Abidjan par defaut 
+ou au pire si ,getWeather retourne une erreur , ca affichera les infos sur Abidjan en utilisant les données retournée par la nouvele API 
+
+du coups on est pas obligé de modifier la fonction qui permet d'avoir les donées selon la longitude et la altitude , c'et juste que ça utilisera un algo et une API differnte 
+
+une autre écriture de ce code : export async function cityWeatherDisplay(city) {
+  try {
+    await getWeather(city).then((cityWeatherData) => {
+      /**debugg */ console.log(`voila les données ${cityWeatherData}`);
+      infoDisplay(
+        cityWeatherData.main.temp,
+        cityWeatherData.main.humidity,
+        cityWeatherData.wind.speed,
+        cityWeatherData.visibility
+      );
+    });
+    
+  } catch (error) {
+    /**debug */ console.error(error);
+  }
+}
+
+
+est 
+
+export async function cityWeatherDisplay(city) {
+  try {
+    const cityWeatherData = await getWeather(city);
+    console.log(`voila les données ${cityWeatherData}`);
+    infoDisplay(
+      cityWeatherData.main.temp,
+      cityWeatherData.main.humidity,
+      cityWeatherData.wind.speed,
+      cityWeatherData.visibility
+    );
+  } catch (error) {
+    console.error(error);
+    // Gestion des erreurs
+  }
+}
+

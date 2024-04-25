@@ -10,6 +10,7 @@ const weatherIndicator = document.querySelector("#weather");
 const diagnosticVerdict = document.querySelector(".diagnostic_verdict");
 
 const temperature = document.getElementsByClassName("temperature");
+const mainTemperature = document.getElementById("main_Temp");
 const temperature2 = document.getElementById("temp");
 const humidity = document.getElementById("humidity");
 const precipitation = document.getElementById("precipitaion");
@@ -21,18 +22,19 @@ const weather = document.getElementById("weather");
 const cityInfo = document.getElementById("cityInfo");
 const HistoryDisplay = document.querySelector(".historyDisplay");
 const noDataStatement = document.getElementById("noData");
+const background = document.getElementById("background");
 //Fin variables
 
 //currentPositon weather function to get  the user current position  and then
 //dislay the user current position Weather Inof
 
-function infoDisplay(temp, humi, windInt, visib) {
-  temperature[1].textContent = temp;
-  temperature[0].textContent = `${temp}°C`;
-  humidity.innerText = humi;
-  wind.innerText = windInt;
-  visibility.innerText = visib;
-}
+// function infoDisplay(temp, humi, windInt, visib) {
+//   temperature[1].textContent = temp;
+//   temperature[0].textContent = `${temp}°C`;
+//   humidity.innerText = humi;
+//   wind.innerText = windInt;
+//   visibility.innerText = visib;
+// }
 
 // Manipulatio de l'historique sinon on passera notre temps à reinitialiser l'historique
 let citiesHistory = [];
@@ -41,6 +43,7 @@ const historyContainer = document.createElement("ul");
 
 window.addEventListener("load", () => {
   cityWeatherDisplay("Abidjan");
+  displayVerdict();
 });
 
 //le code à partir du else ligne 142
@@ -58,6 +61,8 @@ sendButton.addEventListener("click", (e) => {
   } else {
     //à factoriser
     try {
+      // temperature[0].classList.remove("temperatureSideIn");
+      // temperature[0].classList.add("temperatureSideOut");
       cityWeatherDisplay(searchFieldContent);
       let li = document.createElement("li");
       li.textContent = searchFieldContent;
@@ -94,6 +99,8 @@ searchField.addEventListener("keydown", function (e) {
     if (searchFieldContent === "") {
       cityWeatherDisplay("Abidjan");
     } else {
+      temperature[0].classList.remove("temperatureSideIn");
+      temperature[0].classList.add("temperatureSideOut");
       cityWeatherDisplay(searchFieldContent);
       let li = document.createElement("li");
       li.textContent = searchFieldContent;

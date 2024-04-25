@@ -17,7 +17,10 @@
 body main {
   width: 100%;
   height: 100vh;
+  transition: all ease-in 200ms;
   background-color: black;
+  background-image: url("assets/images/clear_sky.jpg");
+  background-size: cover;
   display: flex;
   justify-content: space-between;
 }
@@ -62,7 +65,7 @@ body main .infoDisplay .weatherDisplay .diagnostic_block {
   height: fit-content;
   max-height: 300px;
   align-items: center;
-  gap: 40px;
+  gap: 60px;
 }
 body main .infoDisplay .weatherDisplay .diagnostic_block #icon {
   width: 24px;
@@ -72,11 +75,13 @@ body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text h3 {
   font-size: 20px;
   font-family: "MontserratSemi";
   color: white;
+  margin-bottom: 20px;
 }
 body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text p {
   font-size: 16px;
   font-family: "MontserratRegular";
   color: white;
+  transition: all ease-in 1s;
 }
 body main .infoDisplay .weatherDisplay #temperature {
   font-size: 24px;
@@ -228,6 +233,42 @@ body main .sideBar section .weatherDataZone .weatherData .data p {
   font-family: "MontserratRegular", sans-serif;
   font-size: 16px;
   color: white;
+}
+
+@keyframes TempMovesIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  95% {
+    transform: translateY(3%) rotateY(20deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0%) rotateY(0deg);
+    opacity: 1;
+  }
+}
+@keyframes TempMovesOut {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  95% {
+    transform: translateY(-3%) rotateY(20deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100%) rotateY(0deg);
+    opacity: 0;
+  }
+}
+.temperatureSideIn {
+  animation: TempMovesIn 1s ease-in-out;
+}
+
+.temperatureSideOut {
+  animation: TempMovesOut 1s ease-in-out;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,8 +1,3 @@
-// import { configDotenv } from "dotenv";
-// import './node_modules/dotenv/config';
-// require('dotenv').config();
-
-// variables
 const searchField = document.querySelector("#SearchZone");
 const sendButton = document.querySelector(".send");
 const diagnosticExplanation = document.querySelector(".diagnostic_explanation");
@@ -27,7 +22,6 @@ const noDataStatement = document.getElementById("noData");
 const background = document.getElementById("background");
 
 const verdict = document.querySelector(".diagostic_explanation");
-//Fin variables
 
 export function getWeather(city) {
   return new Promise((resolve, reject) => {
@@ -66,7 +60,7 @@ export function RecordInCityHistory(citiesArray, cityName) {
 }
 
 export async function cityWeatherDisplay(city) {
-  searchField.textContent = ""; // pour reinitialiser le input
+  searchField.textContent = "";
   try {
     await getWeather(city).then((cityWeatherData) => {
       /**debugg */ console.log(`voila les données ${cityWeatherData}`);
@@ -79,7 +73,6 @@ export async function cityWeatherDisplay(city) {
         cityWeatherData.main.pressure,
         city
       );
-
       /** debug */ console.log(
         `modification du Background , type : ${cityWeatherData.weather[0].main}`
       );
@@ -107,13 +100,8 @@ export async function cityWeatherDisplay(city) {
   }
 }
 
-/**Fonction de chatGPT
- * L'API que j'utiliserai est lente asf ,mais bon c'est pour les test
- */
-
-// Comme paramètre , il recevra les données de temperatures etc et il est intégré à infoDisplay plus haut
 function getVerdict(temp, humi, windInt, visib, weatheForecast, pressure) {
-  let needed_content = `You are a weather AI designed for drone enthusiasts. You provide recommendations on whether it\'s safe to fly based on data, offering clear explanations for your decisions. what do you think of those  conditions ? ${humi},${temp},${windInt},${visib},${weatheForecast},${pressure},try to write your diagnostic in 4line max`;
+  let needed_content = `You are a weather AI designed for drone enthusiasts. You provide recommendations on whether it\'s safe to fly based on data, offering clear explanations for your decisions. what do you think of those  conditions ? ${humi}%,${temp}°C,${windInt}m/s,${visib}m,${weatheForecast},${pressure}hPa,try to write your diagnostic in 4line max`;
   return new Promise((resolve, reject) => {
     const url = "https://open-ai21.p.rapidapi.com/chatgpt";
     const options = {
@@ -150,6 +138,28 @@ function getVerdict(temp, humi, windInt, visib, weatheForecast, pressure) {
       });
   });
 }
+async function displayVerdict(
+  temp,
+  humi,
+  windInt,
+  visib,
+  weatheForecast,
+  pressure,
+  city
+) {
+  await getVerdict(
+    temp,
+    humi,
+    windInt,
+    visib,
+    weatheForecast,
+    pressure,
+    city
+  ).then((response) => {
+    /**debug */ console.log(JSON.stringify(response));
+    verdict.innerHTML = response.result;
+  });
+}
 
 async function infoDisplay(
   temp,
@@ -172,20 +182,7 @@ async function infoDisplay(
     weather.innerText = `${weatheForecast}`;
     atmos_pressure.innerText = `${pressure} hPa`;
     cityInfo.innerText = `${city}`;
-
-    await getVerdict(
-      temp,
-      humi,
-      windInt,
-      visib,
-      weatheForecast,
-      pressure,
-      city
-    ).then((response) => {
-      /**debug */ console.log(JSON.stringify(response));
-      verdict.innerHTML = response.result;
-    });
-
+    displayVerdict(temp, humi, windInt, visib, weatheForecast, pressure, city);
     /**Animation
      */
     // temperature[0].classList.remove("temperatureSideOut");

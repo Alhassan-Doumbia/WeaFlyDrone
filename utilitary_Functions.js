@@ -1,27 +1,23 @@
-const searchField = document.querySelector("#SearchZone");
-const sendButton = document.querySelector(".send");
-const diagnosticExplanation = document.querySelector(".diagnostic_explanation");
+/*
+  Created by Doumbia Al Hassan, AKA Caprisunpapy
+  Abidjan, Côte d'Ivoire
+*/
 
+const SearchInput = document.querySelector("#SearchZone");
 const temperatureIcon = document.querySelector("#icon");
-const weatherIndicator = document.querySelector("#weather");
-const diagnosticVerdict = document.querySelector(".diagnostic_verdict");
-
 const temperature = document.getElementsByClassName("temperature");
-const mainTemperature = document.getElementById("main_Temp");
-const temperature2 = document.getElementById("temp");
 const humidity = document.getElementById("humidity");
-const precipitation = document.getElementById("precipitaion");
 const wind = document.getElementById("wind");
 const visibility = document.getElementById("visibility");
-const lightIntensity = document.getElementById("light_intensity");
 
 const weather = document.getElementById("weather");
 const cityInfo = document.getElementById("cityInfo");
 const HistoryDisplay = document.querySelector(".historyDisplay");
-const noDataStatement = document.getElementById("noData");
-const background = document.getElementById("background");
 
+const background = document.getElementById("background");
 const verdict = document.querySelector(".diagostic_explanation");
+
+const loader = document.querySelector(".loader");
 
 export function getWeather(city) {
   return new Promise((resolve, reject) => {
@@ -60,7 +56,7 @@ export function RecordInCityHistory(citiesArray, cityName) {
 }
 
 export async function cityWeatherDisplay(city) {
-  searchField.textContent = "";
+  SearchInput.textContent = "";
   try {
     await getWeather(city).then((cityWeatherData) => {
       /**debugg */ console.log(`voila les données ${cityWeatherData}`);
@@ -76,24 +72,6 @@ export async function cityWeatherDisplay(city) {
       /** debug */ console.log(
         `modification du Background , type : ${cityWeatherData.weather[0].main}`
       );
-      switch (cityWeatherData.weather[0].main) {
-        case "clouds":
-          background.style.backgroundImage =
-            "url('assets/images/cloudy_sky.jpg')";
-          temperatureIcon.setAttribute(
-            "src",
-            "assets/icones/icons8-rain-96.png"
-          );
-          break;
-        case "clear":
-          background.style.backgroundImage =
-            "url('assets/images/clear_sky.jpg')";
-          temperatureIcon.setAttribute(
-            "src",
-            "assets/icones/icons8-summer-96.png"
-          );
-          break;
-      }
     });
   } catch (error) {
     /**debug */ console.error(error);
@@ -147,6 +125,8 @@ async function displayVerdict(
   pressure,
   city
 ) {
+  verdict.innerHTML = "";
+  loader.style.display = "block";
   await getVerdict(
     temp,
     humi,
@@ -157,6 +137,7 @@ async function displayVerdict(
     city
   ).then((response) => {
     /**debug */ console.log(JSON.stringify(response));
+    loader.style.display = "none";
     verdict.innerHTML = response.result;
   });
 }
@@ -182,11 +163,44 @@ async function infoDisplay(
     weather.innerText = `${weatheForecast}`;
     atmos_pressure.innerText = `${pressure} hPa`;
     cityInfo.innerText = `${city}`;
-    displayVerdict(temp, humi, windInt, visib, weatheForecast, pressure, city);
-    /**Animation
-     */
-    // temperature[0].classList.remove("temperatureSideOut");
-    // temperature[0].classList.add("temperatureSideIn");
+    // displayVerdict(temp, humi, windInt, visib, weatheForecast, pressure, city);
+
+    /**For background change */
+
+    const goodWeather = [
+      "Clear",
+      "Sunny",
+      "Fair",
+      "Partly Cloudy",
+      "Mostly Sunny",
+    ];
+    const badWeather = [
+      "Cloudy",
+      "Overcast",
+      "Fog",
+      "Haze",
+      "Mist",
+      "Rain",
+      "Clouds",
+    ];
+
+    let darkUrl = "assets/images/darkky.jpg";
+    let clearUrl = "assets/images/clear-sky.jpg";
+    let weatherForecast = weatheForecast;
+
+    if (goodWeather.includes(weatherForecast)) {
+      /**debug */ console.log("changement de background to clearSky");
+      background.style.backgroundImage = `url(${clearUrl})`;
+      /**debug */ console.log("changement des icone pour clearSky");
+      temperatureIcon.setAttribute("src", "assets/icones/icons8-summer-96.png");
+    } else if (badWeather.includes(weatherForecast)) {
+      /**debug */ console.log("changement de background to clearSky");
+      background.style.backgroundImage = `url(${darkUrl})`;
+      temperatureIcon.setAttribute("src", "assets/icones/icons8-rain-96.png");
+    } else {
+      // Gestion des cas non couverts
+      console.log("Prévision météorologique inconnue");
+    }
   } catch (error) {
     console.error(error);
   }

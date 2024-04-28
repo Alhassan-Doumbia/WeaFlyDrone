@@ -163,7 +163,7 @@ async function infoDisplay(
     weather.innerText = `${weatheForecast}`;
     atmos_pressure.innerText = `${pressure} hPa`;
     cityInfo.innerText = `${city}`;
-    // displayVerdict(temp, humi, windInt, visib, weatheForecast, pressure, city);
+    displayVerdict(temp, humi, windInt, visib, weatheForecast, pressure, city);
 
     /**For background change */
 

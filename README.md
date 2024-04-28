@@ -10,9 +10,9 @@ WeaFlyDrone est une application Web permettant d'assister les pilotes de drone d
 
 ## Captures d'écran
 
-![Loading screen +  cloudy background](assets\screenshots\Capture d'écran 2024-04-28 174621.png)
+[Loading screen + cloudy background](assets\screenshots\Capture d'écran 2024-04-28 174621.png)
 
-![working interface](assets\screenshots\Capture d'écran 2024-04-28 174633.png)
+[working interface](assets\screenshots\Capture d'écran 2024-04-28 174633.png)
 
 ## Technologies utilisées
 

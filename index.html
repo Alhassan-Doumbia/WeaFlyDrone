@@ -4,22 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="components/loader.css" />
     <script type="module" src="script.js" defer></script>
     <title>WeaFlyDrone</title>
   </head>
   <body>
-    <main class="contentZone">
+    <main class="contentZone" id="background">
       <div class="infoDisplay">
         <header>
           <img src="assets\icones\WeaFlyDrone.png" alt="" class="logo" />
         </header>
         <div class="weatherDisplay">
           <div>
-            <p id="weather">Orage</p>
-            <h3 id="cityInfo"><!--Abidjan,Côte d'ivoire-->???</h3>
+            <p id="weather">???</p>
+            <h3 id="cityInfo">???</h3>
 
             <div class="temperature_icon">
-              <p class="temperature"><!--21°C-->???</p>
+              <p class="temperature" id="main_Temp"><!--21°C-->???</p>
               <img
                 src="assets\icones\icons8-cloud-lightning-96.png"
                 alt="#"
@@ -29,24 +30,21 @@
           </div>
 
           <div class="diagnostic_block">
-            <div id="icon">
+            <!-- <div id="icon">
               <img
                 src="assets\icones\icons8-drone-bottom-view-50 (1).png"
                 alt=""
               />
-            </div>
+            </div> -->
             <div class="diagnostic_text">
               <!--display flex ; dirction column ; -->
-              <h3 class="diagnostic_verdict">We can't Fly</h3>
-              <p class="diagostic_explanation">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed,
-                sint! Iste animi alias adipisci eum debitis ratione, esse,
-                facilis inventore modi maiores eius pariatur, autem ipsam nemo
-                quibusdam illo culpa! Maxime neque beatae expedita eius sed fuga
-                ipsa necessitatibus rerum, blanditiis a deserunt sint aliquam
-                officia voluptatem illo quaerat in voluptates consequatur
-                corrupti totam doloribus obcaecati minima. Cum, dicta? Iste.
-              </p>
+              <h3 class="diagnostic_verdict">Diagnostic</h3>
+              <div class="explanationBlock">
+                <!-- Le loader est intégré ici -->
+                <span class="loader"></span>
+                <p class="diagostic_explanation">&nbsp;</p>
+                <!--Caractèr invisible-->
+              </div>
             </div>
           </div>
         </div>

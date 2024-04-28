@@ -64,9 +64,8 @@ body {
     width: 100%;
     height: 100vh;
 
-    transition: all ease-in 200ms;
-    background-color: black; // remplacer ce backgroud par une image
-    background-image: url("assets/images/clear_sky.jpg"); //lien vers l'image
+    transition: all ease-in 300ms;
+    background-color: black; // Background par defaut
     background-size: cover;
 
     display: flex;
@@ -127,18 +126,34 @@ body {
             height: 24px;
           }
           .diagnostic_text {
+            // border: 1px solid purple;
+            min-width: 700px;
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+
+            padding: 20px;
+            border-radius: 3px;
             h3 {
               font-size: $sub_headlines;
               font-family: $fontFamSemiBold;
               color: $regularColor;
               margin-bottom: 20px;
             }
-            p {
-              font-size: $regular;
-              font-family: $fontFamRegular;
-              color: $regularColor;
+            .explanationBlock {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .loader {
+                display: none;
+              }
+              p {
+                font-size: $regular;
+                font-family: $fontFamRegular;
+                color: $regularColor;
 
-              transition: all ease-in 1s;
+                transition: all ease-in 1s;
+                text-align: justify;
+              }
             }
           }
         }
@@ -163,11 +178,11 @@ body {
     .sideBar {
       width: 30%;
       height: 100%;
-      // background-color: purple;
-
+      background-color: rgba(31, 30, 30, 0.6);
       display: flex;
       flex-direction: column;
       gap: 10px;
+
       form {
         display: flex;
         input[type="text"] {
@@ -208,13 +223,13 @@ body {
         .historyZone {
           padding-left: 20px;
           padding-right: 20px;
-
           // background-color: yellowgreen;
           min-height: 100px;
           height: fit-content;
           width: 100%;
           .historyHeadlines {
             @include SubHeadlinesBox();
+            margin-bottom: 30px;
           }
           .historyDisplay {
             display: flex;
@@ -222,9 +237,46 @@ body {
             justify-content: center;
             align-items: center;
 
+            padding-left: 5px;
+            padding-right: 5px;
+
             width: 100%;
             min-height: 100px;
+            max-height: 300px;
+
+            overflow-y: scroll;
+
             height: fit-content;
+            border-radius: 3px;
+
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+
+            /* Personnalisation du scroller */
+            &::-webkit-scrollbar {
+              width: 5px; /* Largeur du scroller */
+            }
+
+            &::-webkit-scrollbar-track {
+              background: black; /* Couleur de fond du scroller */
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: #888; /* Couleur de la poignée du scroller */
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+              background: #555; /* Couleur de la poignée du scroller au survol */
+            }
+
+            scrollbar {
+              width: 5px; /* Largeur du scroller */
+            }
+
+            scrollbar-thumb {
+              background: #888; /* Couleur de la poignée du scroller */
+            }
+
             li {
               cursor: pointer;
               width: 100%;
@@ -312,11 +364,11 @@ body {
     opacity: 0;
   }
   95% {
-    transform: translateY(3%) rotateY(20deg);
+    transform: translateY(3%);
     opacity: 0.8;
   }
   100% {
-    transform: translateY(0%) rotateY(0deg);
+    transform: translateY(0%);
     opacity: 1;
   }
 }
@@ -326,11 +378,11 @@ body {
     opacity: 1;
   }
   95% {
-    transform: translateY(-3%) rotateY(20deg);
+    transform: translateY(-3%);
     opacity: 0.8;
   }
   100% {
-    transform: translateY(-100%) rotateY(0deg);
+    transform: translateY(-100%);
     opacity: 0;
   }
 }

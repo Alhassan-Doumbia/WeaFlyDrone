@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   list-style: none;
   text-decoration: none;
@@ -17,9 +18,8 @@
 body main {
   width: 100%;
   height: 100vh;
-  transition: all ease-in 200ms;
+  transition: all ease-in 300ms;
   background-color: black;
-  background-image: url("assets/images/clear_sky.jpg");
   background-size: cover;
   display: flex;
   justify-content: space-between;
@@ -71,17 +71,33 @@ body main .infoDisplay .weatherDisplay .diagnostic_block #icon {
   width: 24px;
   height: 24px;
 }
+body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text {
+  min-width: 700px;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+  padding: 20px;
+  border-radius: 3px;
+}
 body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text h3 {
   font-size: 20px;
   font-family: "MontserratSemi";
   color: white;
   margin-bottom: 20px;
 }
-body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text p {
+body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text .explanationBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text .explanationBlock .loader {
+  display: none;
+}
+body main .infoDisplay .weatherDisplay .diagnostic_block .diagnostic_text .explanationBlock p {
   font-size: 16px;
   font-family: "MontserratRegular";
   color: white;
   transition: all ease-in 1s;
+  text-align: justify;
 }
 body main .infoDisplay .weatherDisplay #temperature {
   font-size: 24px;
@@ -101,6 +117,7 @@ body main .infoDisplay .weatherDisplay #cityInfo {
 body main .sideBar {
   width: 30%;
   height: 100%;
+  background-color: rgba(31, 30, 30, 0.6);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -155,15 +172,42 @@ body main .sideBar section .historyZone .historyHeadlines {
   font-size: 20px;
   font-family: "MontserratSemi";
   border-bottom: 5px solid white;
+  margin-bottom: 30px;
 }
 body main .sideBar section .historyZone .historyDisplay {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
   width: 100%;
   min-height: 100px;
+  max-height: 300px;
+  overflow-y: scroll;
   height: fit-content;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  /* Personnalisation du scroller */
+}
+body main .sideBar section .historyZone .historyDisplay::-webkit-scrollbar {
+  width: 5px; /* Largeur du scroller */
+}
+body main .sideBar section .historyZone .historyDisplay::-webkit-scrollbar-track {
+  background: black; /* Couleur de fond du scroller */
+}
+body main .sideBar section .historyZone .historyDisplay::-webkit-scrollbar-thumb {
+  background: #888; /* Couleur de la poignée du scroller */
+}
+body main .sideBar section .historyZone .historyDisplay::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Couleur de la poignée du scroller au survol */
+}
+body main .sideBar section .historyZone .historyDisplay scrollbar {
+  width: 5px; /* Largeur du scroller */
+}
+body main .sideBar section .historyZone .historyDisplay scrollbar-thumb {
+  background: #888; /* Couleur de la poignée du scroller */
 }
 body main .sideBar section .historyZone .historyDisplay li {
   cursor: pointer;
@@ -241,11 +285,11 @@ body main .sideBar section .weatherDataZone .weatherData .data p {
     opacity: 0;
   }
   95% {
-    transform: translateY(3%) rotateY(20deg);
+    transform: translateY(3%);
     opacity: 0.8;
   }
   100% {
-    transform: translateY(0%) rotateY(0deg);
+    transform: translateY(0%);
     opacity: 1;
   }
 }
@@ -255,11 +299,11 @@ body main .sideBar section .weatherDataZone .weatherData .data p {
     opacity: 1;
   }
   95% {
-    transform: translateY(-3%) rotateY(20deg);
+    transform: translateY(-3%);
     opacity: 0.8;
   }
   100% {
-    transform: translateY(-100%) rotateY(0deg);
+    transform: translateY(-100%);
     opacity: 0;
   }
 }
